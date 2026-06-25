@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+  namespace: nagp-devops
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS company;
+
+    USE company;
+
+    CREATE TABLE employees (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        department VARCHAR(100) NOT NULL,
+        salary DECIMAL(10,2) NOT NULL
+    );
+
+    INSERT INTO employees (name, department, salary) VALUES
+    ('John Doe', 'Engineering', 75000.00),
+    ('Jane Smith', 'HR', 60000.00),
+    ('Michael Johnson', 'Finance', 70000.00),
+    ('Emily Davis', 'Marketing', 65000.00),
+    ('Robert Wilson', 'Engineering', 80000.00),
+    ('Sophia Brown', 'Sales', 62000.00),
+    ('Daniel Taylor', 'Support', 55000.00),
+    ('Olivia Anderson', 'Operations', 68000.00);

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-ingress-external
+  namespace: nagp-devops
+  annotations:
+    # OPTIONAL: Link your reserved global static IP address if you have one
+    # kubernetes.io/ingress.global-static-ip-name: "my-ingress-static-ip"
+    
+    # RECOMMENDED: Explicitly force HTTP to HTTPS redirect if using SSL later
+    kubernetes.io/ingress.allow-http: "true" 
+    kubernetes.io/ingress.class: "gce" # Use this instead of ingressClassName
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 80
